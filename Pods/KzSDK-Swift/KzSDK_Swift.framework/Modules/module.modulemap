@@ -1,0 +1,11 @@
+framework module KzSDK_Swift {
+  umbrella header "KzSDK_Swift.h"
+
+  export *
+  module * { export * }
+}
+
+module KzSDK_Swift.Swift {
+    header "KzSDK_Swift-Swift.h"
+    requires objc
+}

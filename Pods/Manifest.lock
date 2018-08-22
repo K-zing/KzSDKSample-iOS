@@ -1,0 +1,22 @@
+PODS:
+  - KzSDK-Swift (0.0.3):
+    - SwiftyRSA
+  - SwiftyRSA (1.4.0):
+    - SwiftyRSA/ObjC (= 1.4.0)
+  - SwiftyRSA/ObjC (1.4.0)
+
+DEPENDENCIES:
+  - KzSDK-Swift
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - KzSDK-Swift
+    - SwiftyRSA
+
+SPEC CHECKSUMS:
+  KzSDK-Swift: fbf7487c08d91b36164a1f2b190f367397bfe664
+  SwiftyRSA: 601e4585fece2c6c50ae93a67c77cc2426e55cb2
+
+PODFILE CHECKSUM: 27cd983f6a5f2d0f8234e91a1e0fce6c3aac2fa2
+
+COCOAPODS: 1.5.3
