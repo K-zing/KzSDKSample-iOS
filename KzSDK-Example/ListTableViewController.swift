@@ -22,7 +22,7 @@ public class ListTableViewController: UITableViewController {
         super.viewDidLoad()
         
         let getKey = ApiAction.GetKey()
-        let getGPByPlatform = ApiAction.GetGPByPlatform().setAvailableOnly(true).setIncludeSubGames(true)
+        let getGPByPlatform = ApiAction.GetGPByPlatform().setIncludeSubGames(true)
         let getDownloadAppList = ApiAction.GetDownloadAppList()
         let getActivitiesContent = ApiAction.GetActivitiesContent().setActivityId("1234567890")
         let getClientInfo = ApiAction.GetClientInfo()
