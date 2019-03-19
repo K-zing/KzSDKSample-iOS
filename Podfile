@@ -6,5 +6,5 @@ target 'KzSDK-Example' do
   use_frameworks!
 
   # Pods for KzSDK-Example
-  pod 'KzSDK-Swift', '0.0.4'
+  pod 'KzSDK-Swift', '1.0.4'
 end

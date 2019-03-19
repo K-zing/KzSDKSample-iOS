@@ -51,9 +51,8 @@ public class ListTableViewController: UITableViewController {
         
         let getMemberInfo = ApiAction.GetMemberInfo()
         let getBonus = ApiAction.GetBonus().setStartDate(startDate).setEndDate(endDate).setOffset(offset).setPageCount(pageCount)
-        let getBankDictionary = ApiAction.GetBankDictionary()
         let getWithdrawBanksList = ApiAction.GetWithdrawBanksList()
-        let addBankCard = ApiAction.AddBankCard().setCard("132123123").setBankCode("CODE").setAccountName("Name").setBankAccountName("Name")
+        let addBankCard = ApiAction.AddBankCard().setCardNumber("132123123").setBankCode("CODE").setRegisteredName("name").setBranchName("name")
         let submitWithdraw = ApiAction.SubmitWithdraw().setWithdrawBank("CODE").setWithdrawPassword("withdrawPassword").setAmount(100)
         let applyActivities = ApiAction.ApplyActivities().setActivityId("1234567890")
         let getDepositHistory = ApiAction.GetDepositHistory().setStartDate(startDate).setEndDate(endDate).setOffset(offset).setPageCount(pageCount)
@@ -62,7 +61,14 @@ public class ListTableViewController: UITableViewController {
         let getMessageHistory = ApiAction.GetMessageHistory().setStartDate(startDate).setEndDate(endDate).setOffset(offset).setPageCount(pageCount)
         let getBetHistory = ApiAction.GetBetHistory().setStartDate(startDate).setEndDate(endDate).setPage(page).setGamePlatformId("1234567890")
         let gameTransferOnEnter = ApiAction.GameTransferOnEnter().setGamePlatformAccountId("1234567890")
-        let getGameUrl = ApiAction.GetGameUrl().setAppUrlPath("/url/path")
+        let getGameUrl = ApiAction.GetGameUrl().setAppUrlPath("/url/path").setGamePlatformAccountId("1234567890")
+        let changePassword = ApiAction.ChangePassword().setPassword("password").setNewPassword("newPassword")
+        let changeWithdrawPassword = ApiAction.ChangeWithdrawPassword().setSiteId("siteId").setLoginPassword("password").setNewPassword("newPassword")
+        let getRedPocketInfo = ApiAction.GetRedPocketInfo()
+        let redeemRedPocket = ApiAction.RedeemRedPocket()
+        let getGamePlatformAccounts = ApiAction.GetGamePlatformAccounts()
+        let getAllGamePlatformBalance = ApiAction.GetAllGamePlatformBalance()
+        let getGamePlatformsBalance = ApiAction.GetGamePlatformsBalance().addGamePlatformAccountId("id")
         
         //Currently iOS has no other game platform app supported
         let thirdPartyApp = KzPlatformApp.getInstance(gamePlatformId: "id")?.setUsername("username").setSiteId("siteId")
@@ -85,7 +91,6 @@ public class ListTableViewController: UITableViewController {
         self.apiActionsRequireLogin = [
             getMemberInfo,
             getBonus,
-            getBankDictionary,
             getWithdrawBanksList,
             addBankCard,
             submitWithdraw,
@@ -96,7 +101,14 @@ public class ListTableViewController: UITableViewController {
             getMessageHistory,
             getBetHistory,
             gameTransferOnEnter,
-            getGameUrl
+            getGameUrl,
+            changePassword,
+            changeWithdrawPassword,
+            getRedPocketInfo,
+            redeemRedPocket,
+            getGamePlatformAccounts,
+            getAllGamePlatformBalance,
+            getGamePlatformsBalance
         ]
         if let thirdPartyApp = thirdPartyApp {
             self.apiActionsRequireLogin.append(thirdPartyApp)
@@ -159,9 +171,6 @@ public class ListTableViewController: UITableViewController {
         //GetBonus
         _ = getBonus.addListener(ApiListener<ApiAction.GetBonus.Result>.init(onSuccess: logApiResult, onFail: logApiResult))
         
-        //GetBankDictionary
-        _ = getBankDictionary.addListener(ApiListener<ApiAction.GetBankDictionary.Result>.init(onSuccess: logApiResult, onFail: logApiResult))
-        
         //GetWithdrawBanksList
         _ = getWithdrawBanksList.addListener(ApiListener<ApiAction.GetWithdrawBanksList.Result>.init(onSuccess: logApiResult, onFail: logApiResult))
 
@@ -194,6 +203,27 @@ public class ListTableViewController: UITableViewController {
         
         //GetGameUrl
         _ = getGameUrl.addListener(ApiListener<ApiAction.GetGameUrl.Result>.init(onSuccess: logApiResult, onFail: logApiResult))
+        
+        //ChangePassword
+        _ = changePassword.addListener(ApiListener<ApiAction.ChangePassword.Result>.init(onSuccess: logApiResult, onFail: logApiResult))
+        
+        //ChangeWithdrawPassword
+        _ = changeWithdrawPassword.addListener(ApiListener<ApiAction.ChangeWithdrawPassword.Result>.init(onSuccess: logApiResult, onFail: logApiResult))
+        
+        //GetRedPocketInfo
+        _ = getRedPocketInfo.addListener(ApiListener<ApiAction.GetRedPocketInfo.Result>.init(onSuccess: logApiResult, onFail: logApiResult))
+        
+        //RedeemRedPocket
+        _ = redeemRedPocket.addListener(ApiListener<ApiAction.RedeemRedPocket.Result>.init(onSuccess: logApiResult, onFail: logApiResult))
+        
+        //GetGamePlatformAccounts
+        _ = getGamePlatformAccounts.addListener(ApiListener<ApiAction.GetGamePlatformAccounts.Result>.init(onSuccess: logApiResult, onFail: logApiResult))
+        
+        //GetAllGamePlatformBalance
+        _ = getAllGamePlatformBalance.addListener(ApiListener<ApiAction.GetAllGamePlatformBalance.Result>.init(onSuccess: logApiResult, onFail: logApiResult))
+        
+        //GetGamePlatformsBalance
+        _ = getGamePlatformsBalance.addListener(ApiListener<ApiAction.GetGamePlatformsBalance.Result>.init(onSuccess: logApiResult, onFail: logApiResult))
         
         //KzPlatformApp
         _ = thirdPartyApp?.addListener(KzPlatformAppListener<KzPlatformAppResultProtocol>.init(onSuccess: { result in
